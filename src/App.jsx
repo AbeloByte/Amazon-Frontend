@@ -1,18 +1,19 @@
 // eslint-disable-next-line no-unused-vars
 import { useState } from "react";
-
 import "./App.css";
-import Header from "./components/Header/Header";
-import Landing from "./pages/Landing/Landing";
-
-
-
+// eslint-disable-next-line no-unused-vars
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Routering from "./Router";
+import { DataProvider } from "./components/DataProvider/DataProvider";
+import reducer, { initialState } from "../../Utility/reducer";
 function App() {
   return (
     <>
-      <Header />
-      <Landing/>
-     
+      <BrowserRouter>
+        <DataProvider  reducer={reducer} initialState={initialState} >
+          <Routering />
+        </DataProvider>
+      </BrowserRouter>
     </>
   );
 }
