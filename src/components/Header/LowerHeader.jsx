@@ -21,7 +21,7 @@ function LowerHeader() {
           </ul>
         </div>
         <div>
-            <h1 className="font-bold">Shopping the Game Store</h1>
+            <h1>Shopping the Game Store</h1>
         </div>
       </div>
     </>

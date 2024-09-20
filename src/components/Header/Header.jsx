@@ -112,6 +112,7 @@ function Header() {
 
         <LowerHeader />
       </section>
+
     </>
   );
 }
