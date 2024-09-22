@@ -2,17 +2,18 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import classes from "./Category.module.css";
+import { Link } from "react-router-dom";
 
 function CategoryCard({ data }) {
   return (
-    <div className={classes.category}>
-      <a href="" alt="">
+    <div  className={classes.category}>
+      <Link to={`/category/${data?.name}`} alt="">
         <span>
-          <h2>{data?.title}</h2>
+          <h2 className="text-xl font-mono font-semibold text-center">{data?.title}</h2>
         </span>
         <img src={data?.imgLink} alt="" />
-        <p>shop now</p>
-      </a>
+        <p className="text-2xl font-mono font-semibold text-center">shop now</p>
+      </Link>
     </div>
   );
 }
