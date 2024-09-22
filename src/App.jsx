@@ -5,7 +5,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Routering from "./Router";
 import { DataProvider } from "./components/DataProvider/DataProvider";
-import reducer, { initialState } from "../../Utility/reducer";
+import  reducer,  {initialState } from "./Utility/reducer";
 function App() {
   return (
     <>
