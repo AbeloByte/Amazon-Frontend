@@ -2,21 +2,21 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
-import { Rating } from "@mui/material";
+import  {Rating}  from "@mui/material";
 import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 import classes from "./Product.module.css";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
-import Type from "../../Utility/action.type";
+import Type from '../../Utility/action.type'
 
-function ProductCard({ product, flex, renderDescription }) {
+function ProductCard({ product, flex, renderDescription ,renderBtn}) {
   // eslint-disable-next-line no-unused-vars
   const { image, title, id, rating, price, description } = product;
   console.log(product);
 
 
   const [state,dispatch] = useContext(DataContext)
-
+// console.log(state);
   const addToCart = ()=>{
           dispatch({
             type:Type.ADD_TO_BASKET,
@@ -47,7 +47,7 @@ function ProductCard({ product, flex, renderDescription }) {
             </div>
           )}
           <div>
-            <Rating value={rating?.rate} precision={0.1} />
+            <Rating color="red  " value={rating?.rate} precision={0.1} />
             {/* rating count */}
             <small>{rating?.count}</small>
           </div>
@@ -55,7 +55,7 @@ function ProductCard({ product, flex, renderDescription }) {
             <CurrencyFormat amount={price} />
           </div>
 
-          <button className={`${classes.button} `} onClick={addToCart}>add to cart</button>
+          {renderBtn && <button className={`${classes.button} `} onClick={addToCart}>add to cart</button>}
         </div>
       </div>
     </>
