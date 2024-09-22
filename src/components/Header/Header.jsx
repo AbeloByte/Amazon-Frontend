@@ -1,13 +1,37 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { SlLocationPin } from "react-icons/sl";
 import { BiCartAdd } from "react-icons/bi";
 // eslint-disable-next-line no-unused-vars
 import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
-// import { a } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ChooseLocation from "../ChooseLocation/ChooseLocation";
+import { DataContext } from "../DataProvider/DataProvider";
 function Header() {
+const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // Open the location popup
+  // eslint-disable-next-line no-unused-vars
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  // Close the location popup
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+
+
+// dispatch
+const [ {basket},dispatch] = useContext(DataContext)
+console.log(basket.length);
+const total = basket.reduce((amount, item) => {
+    return  item.amount + amount;
+  }, 0);
 
   return (
     <>
@@ -18,12 +42,12 @@ function Header() {
             {/* Logo and DeliverContent Container */}
             <div className={classes.logo__container}>
               {/* Logo */}
-              <a href="/">
+              <Link to="/">
                 <img
                   src="https://pngimg.com/uploads/amazon/small/amazon_PNG11.png"
                   alt=""
                 />
-              </a>
+              </Link>
 
               {/* Delivery Content */}
               <div className={classes.delivery}>
@@ -35,12 +59,13 @@ function Header() {
                   <p>Delivered To</p>
                   <span>Ethiopia</span>
                 </div>
+                 {isPopupOpen && <ChooseLocation closePopup={closePopup} />} 
               </div>
             </div>
 
             {/* Searching */}
             <div className={classes.search}>
-              <select name="" id="">
+              <select name="" id="" >
                 <option value="">All</option>
                 {/* <option value="Arts & Crafts">Arts & Crafts</option>
                 <option value="Automotive">Automotive</option>
@@ -76,7 +101,7 @@ function Header() {
 
             {/* right Side Icons */}
             <div className={classes.order__container}>
-              <a href="" className={classes.language}>
+              <Link to="" className={classes.language}>
                 <img
                   src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1024px-Flag_of_the_United_States.svg.png"
                   alt=""
@@ -86,26 +111,26 @@ function Header() {
                   <option value="">Ch</option>
                   <option value="">JP</option>
                 </select>
-              </a>
+              </Link>
 
-              <a href="">
+              <Link to="/Auth">
                 <div>
                   <>
                     <p>Hello, Sign In</p>
                     <span>Account & Lists</span>
                   </>
                 </div>
-              </a>
+              </Link>
 
-              <a href="">
+              <Link to="/orders">
                 <p>Returns</p>
                 <span>& Orders</span>
-              </a>
+              </Link>
 
-              <a href="" className={classes.cart}>
+              <Link to="/cart" className={classes.cart}>
                 <BiCartAdd size={38} />
-                <span>0</span>
-              </a>
+                <span>{total}</span>
+              </Link>
             </div>
           </div>
         </section>
