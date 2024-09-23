@@ -9,7 +9,7 @@ export const categoryInfos = [
       title: "Discover fashion trends",
       name: "women's clothing",
       imgLink:
-        "https://images-na.ssl-images-amazon.com/images/G/01/softlines/shopbop/ingress/2023/March/mp_20230219_ff_desktopsinglecategory_desktop_379x304_1._SY304_CB612639047_.jpg",
+        "https://images.unsplash.com/photo-1675881149252-a2e3d0e57e0f?w=2000&auto=format&fit=crop&q=&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZlbWFsZSUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
     },
     {
       title: "Men's Clothing",
