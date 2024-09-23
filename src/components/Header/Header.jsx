@@ -8,7 +8,6 @@ import { BiCartAdd } from "react-icons/bi";
 import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
-import ChooseLocation from "../ChooseLocation/ChooseLocation";
 import { DataContext } from "../DataProvider/DataProvider";
 function Header() {
 const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -59,7 +58,6 @@ const total = basket.reduce((amount, item) => {
                   <p>Delivered To</p>
                   <span>Ethiopia</span>
                 </div>
-                 {isPopupOpen && <ChooseLocation closePopup={closePopup} />} 
               </div>
             </div>
 
