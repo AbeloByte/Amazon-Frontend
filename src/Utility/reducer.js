@@ -2,6 +2,7 @@ import Type from "./action.type";
 
 export const initialState = {
   basket: [],
+  user:null
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,6 +49,14 @@ const reducer = (state, action) => {
         basket: newBasket,
       };
     }
+      // check the action type and set it to the new state
+    case Type.SET_USER:
+      return {
+        // use the current State
+        ...state,
+        // and update the user property data
+        user: action.user,
+      }; 
 
     default:
       return state;

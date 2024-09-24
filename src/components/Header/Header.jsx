@@ -9,8 +9,9 @@ import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
+import { auth } from "../../Utility/firebase";
 function Header() {
-const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // Open the location popup
   // eslint-disable-next-line no-unused-vars
@@ -23,13 +24,11 @@ const [isPopupOpen, setIsPopupOpen] = useState(false);
     setIsPopupOpen(false);
   };
 
-
-
-// dispatch
-const [ {basket},dispatch] = useContext(DataContext)
-console.log(basket.length);
-const total = basket.reduce((amount, item) => {
-    return  item.amount + amount;
+  // dispatch
+  const [{ basket, user }, dispatch] = useContext(DataContext);
+  // console.log(basket.length);
+  const total = basket.reduce((amount, item) => {
+    return item.amount + amount;
   }, 0);
 
   return (
@@ -63,7 +62,7 @@ const total = basket.reduce((amount, item) => {
 
             {/* Searching */}
             <div className={classes.search}>
-              <select name="" id="" >
+              <select name="" id="">
                 <option value="">All</option>
                 {/* <option value="Arts & Crafts">Arts & Crafts</option>
                 <option value="Automotive">Automotive</option>
@@ -89,8 +88,7 @@ const total = basket.reduce((amount, item) => {
                 <option value="Movies & TV">Movies & TV</option>
                 <option value="Music, CDs & Vinyl">Music, CDs & Vinyl</option> */}
               </select>
-  
-              
+
               <input type="text" name="" id="" placeholder="Search Product" />
 
               {/* Search Icon */}
@@ -111,12 +109,21 @@ const total = basket.reduce((amount, item) => {
                 </select>
               </Link>
 
-              <Link to="/Auth">
+              <Link to={!user && "/Auth"}>
                 <div>
-                  <>
-                    <p>Hello, Sign In</p>
-                    <span>Account & Lists</span>
-                  </>
+                  {user ? (
+                    <>
+                      <p>Hello {user?.email.split("@")[0]}</p>
+                      {/* Sign Out */}
+                      <span onClick={() => auth.signOut()}>Sign Out</span>
+                    </>
+                  ) : (
+                    <>
+                    {/* SignIn */}
+                      <p>Hello, Sign In</p>
+                      <span>Account & Lists</span>
+                    </>
+                  )}
                 </div>
               </Link>
 
@@ -135,7 +142,6 @@ const total = basket.reduce((amount, item) => {
 
         <LowerHeader />
       </section>
-
     </>
   );
 }
