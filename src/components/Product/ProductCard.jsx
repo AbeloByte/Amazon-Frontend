@@ -12,7 +12,7 @@ import Type from '../../Utility/action.type'
 function ProductCard({ product, flex, renderDescription ,renderBtn}) {
   // eslint-disable-next-line no-unused-vars
   const { image, title, id, rating, price, description } = product;
-  console.log(product);
+  // console.log(product);
 
 
   const [state,dispatch] = useContext(DataContext)
