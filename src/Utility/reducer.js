@@ -2,7 +2,7 @@ import Type from "./action.type";
 
 export const initialState = {
   basket: [],
-  user:null
+  user: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,7 +32,7 @@ const reducer = (state, action) => {
 
     case Type.REMOVE_FROM_BASKET: {
       const index = state.basket.findIndex((item) => item.id === action.id);
-      let newBasket = [...state.basket]
+      let newBasket = [...state.basket];
 
       if (index >= 0) {
         if (newBasket[index].amount > 1) {
@@ -49,19 +49,24 @@ const reducer = (state, action) => {
         basket: newBasket,
       };
     }
-      // check the action type and set it to the new state
+
+    case Type.EMPTY_BASKET :
+      return {
+        ...state,
+        basket: [],
+      };
+    // check the action type and set it to the new state
     case Type.SET_USER:
       return {
         // use the current State
         ...state,
         // and update the user property data
         user: action.user,
-      }; 
+      };
 
     default:
       return state;
   }
 };
-
 
 export default reducer;

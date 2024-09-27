@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 // import Layout from "../../components/Layout/Layout";
 import classes from "./Auth.module.css";
 import { auth } from "../../Utility/firebase";
 import Type from "../../Utility/action.type";
-
 
 import {
   signInWithEmailAndPassword,
@@ -21,31 +20,27 @@ function Auth() {
   const [email, setEmail] = useState("");
   // password
   const [password, setPassword] = useState("");
-  console.log( password);
+  console.log(password);
   // error
   const [error, setError] = useState("");
-
 
   //loading
   const [loading, setLoading] = useState({ signIn: false, signUp: false });
   //user
   const [{ user }, dispatch] = useContext(DataContext);
 
-
   // navigation
   const navigate = useNavigate();
 
+  const location = useLocation();
 
   // console.log(user);
   const authHandler = async (e) => {
     e.preventDefault();
     console.log(e.target.name);
     if (e.target.name === "signin") {
-
-
       setLoading({ ...loading, signIn: true });
 
-      
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
@@ -57,21 +52,19 @@ function Auth() {
           // This will cause the user state to be updated throughout the app.
           setLoading({ ...loading, signIn: false });
 
-          navigate("/");  
+          navigate(location.state?.from?.redirect || "/");
         })
         .catch((error) => {
           // console.log(error);
           setError(error.message);
           setLoading({ ...loading, signUp: false });
         });
-    } 
-    
-    else {
+    } else {
       setLoading({ ...loading, signUp: true });
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed up
-          console.log(userCredential)
+          console.log(userCredential);
           dispatch({
             type: Type.SET_USER,
             user: userCredential.user,
@@ -85,10 +78,6 @@ function Auth() {
         });
     }
   };
-
-
-
-
 
   return (
     <>
@@ -105,6 +94,18 @@ function Auth() {
 
         <div className={classes.login_Container}>
           <h1>Sign In</h1>
+          {location?.state?.msg && (
+            <small
+              style={{
+                padding: "5px",
+                textAlign: "center",
+                color: "red",
+                fontWeight: "bold",
+              }}
+            >
+              {location?.state?.msg}
+            </small>
+          )}
 
           <form action="">
             {/* Email */}
@@ -174,6 +175,6 @@ function Auth() {
       </section>
     </>
   );
-};
+}
 
 export default Auth;
