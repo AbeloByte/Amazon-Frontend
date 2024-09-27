@@ -70,6 +70,7 @@ function Auth() {
             user: userCredential.user,
           });
           setLoading({ ...loading, signUp: false });
+              navigate(location?.state?.redirect || "/");
         })
         .catch((error) => {
           console.log(error);
