@@ -75,7 +75,7 @@ Follow these simple steps to get the project running locally:
 ## 📫 Get in Touch
 Have questions or suggestions? Feel free to reach out:
 
-- **👤  Name**: [Abel](abelade5076@gmail.com)
+- **👤  Name**: [Abel](gobeztech20@gmail.com)
 - **🌐 GitHub**: [GitHub](https://github.com/AbeloByte)
 
 
